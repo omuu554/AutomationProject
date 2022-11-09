@@ -94,7 +94,7 @@ class ToolBarClass:
     def Get_CartIconColor_Element(self,index:int):
         "returns the element of the item color of spacifice item in CartIcon in toolbar in form: all upper case letters"
         return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[2]/a/label[2]/span")
-    def Get_CartIconItemPrice(self,index:int):
+    def Get_CartIconItemPrice_Element(self,index:int):
         "returns the element of the price of a spacifice item in CartIcon in toolbar"
         return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[3]/p")
 
