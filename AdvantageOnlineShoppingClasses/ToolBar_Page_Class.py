@@ -53,7 +53,7 @@ class ToolBarClass:
 
     def ItemsAmountInCartDigits(self):
         "returns Amount of items in cartIcon "
-        return re.sub(r'[^0-9]','',self.Get_ItemsAmountInCart_Element().get_attribute("textContent"))
+        return int(re.sub(r'[^0-9]','',self.Get_ItemsAmountInCart_Element().get_attribute("textContent")))
 
     def Get_ItemsTotalCostInCart_Element(self):
         "returns the element of the Cost of all items in cartIcon in the toolbar"
@@ -61,7 +61,7 @@ class ToolBarClass:
 
     def ItemsTotalCostInCartDigits(self):
        "returns Total cost of items in cartIcon "
-       return re.sub(r'[^0-9.]', '', self.Get_ItemsTotalCostInCart_Element().get_attribute("textContent"))
+       return float(re.sub(r'[^0-9.]', '', self.Get_ItemsTotalCostInCart_Element().get_attribute("textContent")))
 
     def Get_CartIconCheckOut_Element(self):
         "returns the element of CheckOut button in the cartIcon in toolbar"
@@ -73,7 +73,7 @@ class ToolBarClass:
 
     def CartIconItemCostDigits(self,index:int):
         "returns Cost of specifice item in cartIcon "
-        return re.sub(r'[^0-9.]', '', self.Get_CartIconItemCost_Element(index).get_attribute("textContent"))
+        return float(re.sub(r'[^0-9.]', '', self.Get_CartIconItemCost_Element(index).get_attribute("textContent")))
 
     def Get_CartIconItemName_Element(self,index:int):
         "returns the element of part of the name of a spacifice item from CartIcon in toolbar in format: xxxxxx..."
@@ -89,7 +89,7 @@ class ToolBarClass:
 
     def CartIconQuntityDigits(self,index:int):
         "returns Quantity of specifice item in cartIcon "
-        return re.sub(r'[^0-9]','',self.Get_CartIconQuntity_Element(index).text)
+        return int(re.sub(r'[^0-9]','',self.Get_CartIconQuntity_Element(index).text))
 
     def Get_CartIconColor_Element(self,index:int):
         "returns the element of the item color of spacifice item in CartIcon in toolbar in form: all upper case letters"
@@ -100,7 +100,7 @@ class ToolBarClass:
 
     def CartIconItemPriceDigits(self,index:int):
         "returns the price of a spacifice item in CartIcon in toolbar"
-        return re.sub(r'[^0-9.]', '', self.Get_CartIconItemPrice_Element(index).text)
+        return float(re.sub(r'[^0-9.]', '', self.Get_CartIconItemPrice_Element(index).text))
 
     def Get_CartIconRemoveItem_Element(self,index:int):
         "returns Element of remove button for specifice items in CartIcon ToolBar"
