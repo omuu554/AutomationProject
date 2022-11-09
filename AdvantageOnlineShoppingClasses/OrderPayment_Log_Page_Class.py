@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+import re
 
 
 
@@ -95,6 +96,17 @@ class OrderPaymentLogClass:
         return self.driver.find_element(By.CSS_SELECTOR,"#orderPaymentSuccess>h2>span")
 
 
+    def Get_OrderNumber_Element(self):
+        "Returns The Element of the order number from the thank you page"
+        return self.driver.find_element(By.ID,"orderNumberLabel")
+
+    def Get_TotalPrice_Element(self):
+        "Returns The Element of the total cost of items without shipping from the thank you page"
+        return self.driver.find_element(By.XPATH, "//div[@id='orderPaymentSuccess']/div/div[3]/div[1]/label/a")
+
+    def TotalPriceDigits(self):
+        "Returns Total price of items without shipping in Digits"
+        return re.sub(r'[^0-9.]', '', self.Get_TotalPrice_Element().text)
 
 
 
