@@ -100,7 +100,7 @@ class ToolBarClass:
 
     def CartIconItemPriceDigits(self,index:int):
         "returns the price of a spacifice item in CartIcon in toolbar"
-        return re.sub(r'[^0-9.]', '', self.Get_CartIconItemPrice(index).text)
+        return re.sub(r'[^0-9.]', '', self.Get_CartIconItemPrice_Element(index).text)
 
     def Get_CartIconRemoveItem_Element(self,index:int):
         "returns Element of remove button for specifice items in CartIcon ToolBar"
