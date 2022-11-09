@@ -15,8 +15,17 @@ class UserOrdersClass:
     def Get_FOrderTotalCost_Element(self, index:int):
         return self.Get_OrderedItem_Element(index)[-1].find_element(By.CSS_SELECTOR, "td>label")
 
-    def Get_FOrderItemName(self, index:int):
-        return self.Get_OrderedItem_Element(index)[4].find_element(By.CSS_SELECTOR, "td>span")
+    def Get_FOrderItemName_Element(self, index:int):
+        return self.driver.find_element(By.XPATH,  f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[4]/span")
+
+    def Get_FOrderItemColor_Element(self, index:int):
+        return self.driver.find_element(By.XPATH,  f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[5]/div")
+
+    def FOrderItemColorName(self, index:int):
+        return self.Get_FOrderItemColor(index).get_attribute('title').upper()
+
+    def Get_FOrderItemQuantity_Element(self, index:int):
+        return self.driver.find_element(By.XPATH,  f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[6]/label")
 
 
 
