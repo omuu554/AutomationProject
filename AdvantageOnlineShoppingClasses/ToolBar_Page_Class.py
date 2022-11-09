@@ -67,9 +67,6 @@ class ToolBarClass:
         "returns the element of CheckOut button in the cartIcon in toolbar"
         return self.driver.find_element(By.ID,"checkOutPopUp")
 
-    def Get_CartIconItemInfo_Element(self,index:int):
-        "returns the element of a spacifice item information from CartIcon in toolbar"
-        return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[2]/a")
     def Get_CartIconItemCost_Element(self,index:int):
         "returns the element of a spacifice item Cost from CartIcon in toolbar"
         return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[3]/p")
