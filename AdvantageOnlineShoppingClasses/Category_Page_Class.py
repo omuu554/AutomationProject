@@ -22,7 +22,7 @@ class Category_Page_Advantage:
     def click_product(self, product_id: int):
         """go to product page by the id of the product"""
         self.product(product_id).click()
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 50)
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".max-width>h2")))
 
     def product_name_text(self, product_id: int):
