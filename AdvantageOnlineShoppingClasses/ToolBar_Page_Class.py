@@ -80,7 +80,7 @@ class ToolBarClass:
 
     def Get_CartIconItemName_Element(self,index:int):
         "returns the element of part of the name of a spacifice item from CartIcon in toolbar in format: xxxxxx..."
-        return self.Get_CartIconItemInfo_Element(index).find_element(By.XPATH,"//h3")
+        return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[2]/a/h3")
 
     def CartIconItemNameSTR(self,index:int):
         "returns part of the name of a spacifice item from CartIcon in toolbar"
@@ -96,7 +96,7 @@ class ToolBarClass:
 
     def Get_CartIconColor_Element(self,index:int):
         "returns the element of the item color of spacifice item in CartIcon in toolbar in form: all upper case letters"
-        return self.Get_CartIconItemInfo_Element(index).find_element(By.XPATH, "//label[2]/span")
+        return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[2]/a/label[2]/span")
 
     def Get_CartIconRemoveItem_Element(self,index:int):
         "returns Element of remove button for specifice items in CartIcon ToolBar"
