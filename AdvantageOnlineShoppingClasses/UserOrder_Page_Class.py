@@ -13,6 +13,10 @@ class UserOrdersClass:
         return self.Get_OrderedItem_Element(index)[1].find_element(By.XPATH,"//td/label")
 
     def Get_FOrderTotalCost_Element(self, index:int):
-        return self.Get_OrderedItem_Element(index)[-1].find_element(By.XPATH, "//td/label")
+        return self.Get_OrderedItem_Element(index)[-1].find_element(By.CSS_SELECTOR, "td>label")
+
+    def Get_FOrderItemName(self, index:int):
+        return self.Get_OrderedItem_Element(index)[4].find_element(By.CSS_SELECTOR, "td>span")
+
 
 
