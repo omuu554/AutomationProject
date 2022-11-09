@@ -63,7 +63,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_Category.click_product(17)
         self.Page_Product.SendKeys_ProductQuantity(4)
         self.Page_Product.Click_ADDTOCART()
-        self.assertEqual(self.Page_ToolBar.ItemsAmountInCartDigits(), "7")
+        self.assertEqual(self.Page_ToolBar.ItemsAmountInCartDigits(), 7)
     def test_2(self):
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(25)
