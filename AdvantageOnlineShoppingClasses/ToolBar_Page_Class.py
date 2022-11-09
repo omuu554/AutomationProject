@@ -147,6 +147,13 @@ class ToolBarClass:
     def Wait_UserSignIn(self,username:str):
         self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR,"#menuUserLink>span"),username))
 
+    def Get_UserIconOrders_Element(self):
+        "returns the element of the Orders button after UserIcon was Pressed(User Must be Signed In for it to work)"
+        if (self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']").is_displayed()):
+            return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
+        self.Get_Usericon_Element().click()
+        return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
+
     def Get_Location_Element(self):
         "returns the element of The current location of the user)"
         return self.driver.find_elements(By.CSS_SELECTOR, ".pages>a")[-1]

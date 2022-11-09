@@ -90,6 +90,10 @@ class OrderPaymentLogClass:
         "Returns the Element of PayNow Button of SafePay"
         return self.driver.find_element(By.ID, "pay_now_btn_ManualPayment")
 
+    def Get_ThankYou_Element(self):
+        "Returns The Element of the title of Thank you Page"
+        return self.driver.find_element(By.CSS_SELECTOR,"#orderPaymentSuccess>h2>span")
+
 
 
 
