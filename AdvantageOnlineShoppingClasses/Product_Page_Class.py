@@ -28,6 +28,13 @@ class ProductClass:
         "Returns the Element of a spcifice product Color in the page"
         return self.driver.find_element(By.CSS_SELECTOR, f"span[title='{Color.upper()}']")
 
+    def Get_SelectedColor_Element(self):
+        "Returns the Element of Selected Color"
+        return self.driver.find_element(By.CLASS_NAME, "colorSelected")
+
+    def SelectedColorName(self):
+        return self.Get_SelectedColor_Element().get_attribute("title")
+
     def Get_ProductQuantityMinus_Element(self):
         "Returns the Element Minus button to decrease quantity"
         return self.driver.find_element(By.CLASS_NAME, "minus")
@@ -62,3 +69,4 @@ class ProductClass:
             return True
         except:
             return False
+
