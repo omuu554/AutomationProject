@@ -149,9 +149,6 @@ class ToolBarClass:
 
     def Get_UserIconOrders_Element(self):
         "returns the element of the Orders button after UserIcon was Pressed(User Must be Signed In for it to work)"
-        if (self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']").is_displayed()):
-            return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
-        self.Get_Usericon_Element().click()
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
 
     def Get_Location_Element(self):

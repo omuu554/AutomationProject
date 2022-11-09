@@ -99,6 +99,7 @@ class OrderPaymentLogClass:
         return self.driver.find_element(By.ID, "pay_now_btn_ManualPayment")
 
     def Wait_ThankyouPageLoad(self):
+        "Waits until thank you page loads"
         self.wait.until(EC.visibility_of_element_located((By.ID,"orderNumberLabel")))
 
     def Get_ThankYou_Element(self):

@@ -47,6 +47,10 @@ class ProductClass:
         "Returns the Element quantity bar"
         return self.driver.find_element(By.NAME, "quantity")
 
+    def SendKeys_ProductQuantity(self, Quantity:int):
+        self.ClearProductQuantity()
+        self.Get_ProductQuantity_Element().send_keys(f"{Quantity}")
+
     def ClearProductQuantity(self):
         "Clears quantity of product"
         for i in range(10):
