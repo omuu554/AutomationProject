@@ -1,12 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import re
 
 
 class ToolBarClass:
     def __init__(self, driver:webdriver.Chrome):
         self.driver = driver
+        self.wait = WebDriverWait(self.driver,10)
 
     def Get_AdvLogo_Element(self):
         "returns the element of the SiteLogo in the toolbar"
@@ -79,6 +82,10 @@ class ToolBarClass:
         "returns the element of part of the name of a spacifice item from CartIcon in toolbar in format: xxxxxx..."
         return self.Get_CartIconItemInfo_Element(index).find_element(By.XPATH,"//h3")
 
+    def CartIconItemNameSTR(self,index:int):
+        "returns part of the name of a spacifice item from CartIcon in toolbar"
+        return self.Get_CartIconItemName_Element(index).text.replace(".",'')
+
     def Get_CartIconQuntity_Element(self,index:int):
         "returns the element of the item Quantity of spacifice item in CartIcon in toolbar in form: QTY: x"
         return self.Get_CartIconItemInfo_Element(index).find_element(By.XPATH, "//a/label[1]")
@@ -137,14 +144,8 @@ class ToolBarClass:
         self.Get_Usericon_Element().click()
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='Sign_out'][role='link']")
 
-    def IsUserSignedIn(self,username:str):
-        "returns true if the user is signed in"
-        return self.driver.find_element(By.CSS_SELECTOR,"#menuUserLink>span").text == username
-
     def Wait_UserSignIn(self,username:str):
-        "Wait for user to be signed in"
-        while(not self.IsUserSignedIn(username)):
-            pass
+        self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR,"#menuUserLink>span"),username))
 
     def Get_Location_Element(self):
         "returns the element of The current location of the user)"
