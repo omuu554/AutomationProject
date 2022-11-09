@@ -7,7 +7,6 @@ class Cart_Page_Advantage:
 
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
-
     def product_name(self, product_location: int):
         return self.driver.find_element(By.XPATH, f"//thead/../tbody/tr[{product_location}]/td[2]/label")
 
