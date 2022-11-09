@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class Category_Page_Advantage:
 
@@ -8,12 +9,23 @@ class Category_Page_Advantage:
         self.driver = driver
 
     def product(self, product_id: int):
+        """get product element by the id of the product """
         return self.driver.find_element(By.ID, f"{product_id}")
     def product_name(self, product_id: int):
+        """get product name element by the id of the product """
         return self.driver.find_element(By.XPATH, f"//img[@id='{product_id}']/../p[1]/a")
 
     def product_price(self, product_id: int):
+        """get product price element by the id of the product """
         return self.driver.find_element(By.XPATH, f"//img[@id='{product_id}']/../p[2]/a")
 
     def click_product(self, product_id: int):
         self.product(product_id).click()
+        wait = WebDriverWait(self.driver, 10)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".max-width>h2")))
+
+    def product_name_text(self, product_id: int):
+        return self.product_name(product_id).text
+
+    def product_price_text(self, product_id: int):
+        return re.sub(r'[^0-9.]', '', self.product_price(product_id).text)
