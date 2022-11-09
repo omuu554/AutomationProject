@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import re
 
 
@@ -9,6 +11,7 @@ class OrderPaymentLogClass:
 
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
+        self.wait = WebDriverWait(self.driver,10)
 
     def Get_SelectedDetails_Element(self):
         "Returns the Element of the selected Detailels(Shipping/Payment)"
@@ -16,7 +19,7 @@ class OrderPaymentLogClass:
 
     def SelectedDetailsName(self):
         "Returns a strings with the details name(Shipping/Payment)"
-        return self.Get_SelectedDetails_Element().text
+        return re.sub(r'[0-9. ]',"",self.Get_SelectedDetails_Element().text).replace(' ','')
 
     def Get_Next_Element(self):
         "Returns the Element of the Next button"
@@ -28,7 +31,7 @@ class OrderPaymentLogClass:
 
     def Get_PaymentMethod_Element(self,index:int):
         "Returns the Element of the payment method by index"
-        return self.driver.find_element(By.CSS_SELECTOR,f"//div[@class='paymentMethods']/div[{index}]")
+        return self.driver.find_element(By.XPATH,f"//div[@class='paymentMethods']/div[{index}]")
 
     def Click_PaymentMethod(self,index:int):
         "Click on payment method by index"
@@ -58,6 +61,10 @@ class OrderPaymentLogClass:
         "Returns the Element of CVV Number of MasterCard"
         return self.driver.find_element(By.NAME,"cvv_number")
 
+    def SendKeys_CVVNumber(self,CVV:int):
+        self.Get_CVVNumber_Element().send_keys(f"1{CVV}")
+
+
     def Get_ExpirationDateMonth_Element(self):
         "Returns the Element of the Month Expiration Date of MasterCard"
         return self.driver.find_element(By.NAME,"mmListbox")
@@ -77,7 +84,7 @@ class OrderPaymentLogClass:
     def Select_ExpirationDateYear(self,YearNumber:int):
         "Chooses Month Number from Year Expiration Date dropdown list"
         YearSelector = Select(self.Get_ExpirationDateYear_Element())
-        YearSelector.select_by_visible_text(f"0{YearNumber}")
+        YearSelector.select_by_visible_text(f"{YearNumber}")
 
     def Get_CardHolder_Element(self):
         "Returns the Element of The Card Holder of MasterCard"
@@ -90,6 +97,9 @@ class OrderPaymentLogClass:
     def Get_PayNowMasterCard__Element(self):
         "Returns the Element of PayNow Button of SafePay"
         return self.driver.find_element(By.ID, "pay_now_btn_ManualPayment")
+
+    def Wait_ThankyouPageLoad(self):
+        self.wait.until(EC.visibility_of_element_located((By.ID,"orderNumberLabel")))
 
     def Get_ThankYou_Element(self):
         "Returns The Element of the title of Thank you Page"
