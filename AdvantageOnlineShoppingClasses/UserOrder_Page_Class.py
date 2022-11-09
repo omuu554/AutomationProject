@@ -10,9 +10,9 @@ class UserOrdersClass:
         return self.driver.find_elements(By.XPATH, f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index+1}]/td")
 
     def Get_FOrderNumber_Element(self, index:int):
-        return self.Get_OrderedItem_Element(index)[1].find_element(By.XPATH,"//label")
+        return self.Get_OrderedItem_Element(index)[1].find_element(By.XPATH,"//td/label")
 
     def Get_FOrderTotalCost_Element(self, index:int):
-        return self.Get_OrderedItem_Element(index).find_element(By.XPATH, "//td[1]/label")
+        return self.Get_OrderedItem_Element(index)[-1].find_element(By.XPATH, "//td/label")
 
 

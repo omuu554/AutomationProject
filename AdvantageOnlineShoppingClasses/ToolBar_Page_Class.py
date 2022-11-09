@@ -87,8 +87,8 @@ class ToolBarClass:
         return self.Get_CartIconItemName_Element(index).text.replace(".",'')
 
     def Get_CartIconQuntity_Element(self,index:int):
-        "returns the element of the item Quantity of spacifice item in CartIcon in toolbar in form: QTY: x"
-        return self.Get_CartIconItemInfo_Element(index).find_element(By.XPATH, "//a/label[1]")
+        "returns the element of the item Quantity of spacifice item in CartIcon in toolbar"
+        return self.driver.find_element(By.XPATH, f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[2]/a/label[1]")
 
     def CartIconQuntityDigits(self,index:int):
         "returns Quantity of specifice item in cartIcon "
@@ -139,6 +139,7 @@ class ToolBarClass:
 
     def Get_UserIconSignOut_Element(self):
         "returns the element of the SignOut button after UserIcon was Pressed(User Must be Signed In for it to work)"
+        self.wait.until(EC.invisibility_of_element((By.CLASS_NAME, "PopUp")))
         if(self.driver.find_element(By.CSS_SELECTOR,"label[translate='Sign_out'][role='link']").is_displayed()):
             return self.driver.find_element(By.CSS_SELECTOR,"label[translate='Sign_out'][role='link']")
         self.Get_Usericon_Element().click()
@@ -149,6 +150,10 @@ class ToolBarClass:
 
     def Get_UserIconOrders_Element(self):
         "returns the element of the Orders button after UserIcon was Pressed(User Must be Signed In for it to work)"
+        self.wait.until(EC.invisibility_of_element((By.CLASS_NAME,"PopUp")))
+        if (self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']").is_displayed()):
+            return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
+        self.Get_Usericon_Element().click()
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
 
     def Get_Location_Element(self):
