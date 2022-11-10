@@ -29,6 +29,7 @@ class ToolBarClass:
 
     def Click_CartIcon(self):
         self.Get_Carticon_Element().click()
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"div.uiview>section>article>h3")))
 
     def Get_CloseSearch_Element(self):
         "returns the element of the X in the searchBar after it has been opened in the toolbar"
