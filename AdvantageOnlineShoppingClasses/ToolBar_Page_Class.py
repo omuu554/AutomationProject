@@ -27,6 +27,9 @@ class ToolBarClass:
         "returns the element of the CartIcon in the toolbar"
         return self.driver.find_element(By.ID,"menuCart")
 
+    def Click_CartIcon(self):
+        self.Get_Carticon_Element().click()
+
     def Get_CloseSearch_Element(self):
         "returns the element of the X in the searchBar after it has been opened in the toolbar"
         if(self.driver.find_element(By.ID,"autoComplete").is_displayed()):
