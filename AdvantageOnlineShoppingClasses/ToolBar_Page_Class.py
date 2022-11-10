@@ -158,7 +158,6 @@ class ToolBarClass:
 
     def Get_UserIconSignOut_Element(self,username:str):
         "returns the element of the SignOut button after UserIcon was Pressed(User Must be Signed In for it to work)"
-        self.Wait_UserSignIn(username)
         self.wait.until(EC.invisibility_of_element((By.CLASS_NAME, "PopUp")))
         if(self.driver.find_element(By.CSS_SELECTOR,"label[translate='Sign_out'][role='link']").is_displayed()):
             return self.driver.find_element(By.CSS_SELECTOR,"label[translate='Sign_out'][role='link']")
