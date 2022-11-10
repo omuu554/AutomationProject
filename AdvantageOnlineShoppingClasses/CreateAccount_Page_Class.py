@@ -30,6 +30,6 @@ class CreateAccountClass:
         "Returns the element of THE REGISTER button"
         return self.driver.find_element(By.ID, "register_btnundefined")
 
-    def Click_RegisterButton_Element(self):
+    def Click_RegisterButton(self):
         "Clicks on REGISTER button"
         self.Get_RegisterButton_Element().click()
