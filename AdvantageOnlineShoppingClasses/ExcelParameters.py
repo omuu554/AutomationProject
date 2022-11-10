@@ -6,6 +6,7 @@ class ExcelParemters:
     def __init__(self):
         self.workbook = load_workbook(filename="Parameters.xlsx")
         self.Parameters = self.workbook.active
+        self.NumberToTestDict = {"1":"C", "2":"D", "3":"E", "4":"F", "5":"G", "6":"H", "7":"I", "8":"J", "9":"K", "10":"L"}
 
     def Get_TestParameters_Dict(self,TestNumber:int):
         TestNumber = TestNumber + 1
@@ -20,8 +21,11 @@ class ExcelParemters:
 
         return ParametersDict
 
-    def Edit_CellByTestNumber(self,index:int):
-        pass
+    def Edit_CellByTestNumber(self,index:int, TestResult:str):
+        index = str(index)
+        TestCol = self.NumberToTestDict[index]
+        self.Parameters[f"{TestCol}32"].value = TestResult
+
 
 
 
