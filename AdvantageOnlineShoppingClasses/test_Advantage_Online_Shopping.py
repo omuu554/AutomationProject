@@ -229,6 +229,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_NotLog.tab_password("Ubd2134rt")
         self.Page_OrderPayment_NotLog.click_login_button()
         self.Page_ToolBar.Wait_UserSignIn("BOBB4")
+        self.Page_ToolBar.Wait_CartIconWindowClose()
         self.Page_ToolBar.Get_UserIconMyAccount_Element().click()
         self.Page_UserAccount.Click_EditPaymentMethod()
         self.Page_UserAccount.Get_PaymentMethod_Element(2).click()
@@ -241,6 +242,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_UserAccount.Get_CardHolder_Element().clear()
         self.Page_UserAccount.Get_CardHolder_Element().send_keys("BOBB")
         self.Page_UserAccount.Click_SaveMasterCard()
+        self.Page_UserAccount.Wait_UserAccountPageLoaded()
         self.Page_ToolBar.Click_CartIcon()
         self.Page_Cart.check_out_button_click()
         self.Page_OrderPayment_Log.Click_NextButton()
@@ -248,6 +250,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_Log.Get_PayNowMasterCard__Element().click()
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
+        sleep(5)
         OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text
         self.Page_ToolBar.Click_CartIcon()
         self.assertTrue(self.Page_Cart.empty_cart_taitel().is_displayed())
