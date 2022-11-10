@@ -9,7 +9,7 @@ import re
 class ToolBarClass:
     def __init__(self, driver:webdriver.Chrome):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver,10)
+        self.wait = WebDriverWait(self.driver,20)
 
     def Get_AdvLogo_Element(self):
         "returns the element of the SiteLogo in the toolbar"
