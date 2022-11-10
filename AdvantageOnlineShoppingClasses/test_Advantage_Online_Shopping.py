@@ -58,6 +58,7 @@ class TestAdvantageOnlineShopping(TestCase):
             self.Page_UserAccount = AccountPageClass(self.driver)
 
     def test_1(self):
+      try:
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(20)
         self.Page_Product.SendKeys_ProductQuantity(3)
@@ -68,7 +69,13 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_Product.SendKeys_ProductQuantity(4)
         self.Page_Product.Click_ADDTOCART()
         self.assertEqual(self.Page_ToolBar.ItemsAmountInCartDigits(), 7)
+      except Exception as e:
+         print("test failed")
+         raise e
+
+
     def test_2(self):
+      try:
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(25)
         self.Page_Product.SendKeys_ProductQuantity(2)
@@ -96,8 +103,12 @@ class TestAdvantageOnlineShopping(TestCase):
         self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(1), 199.95)
         self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(2), 479.00)
         self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(3)/2, 129.00)
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def test_3(self):
+      try:
         self.Page_Home.click_category("headphones")
         self.Page_Category.click_product(15)
         self.Page_Product.SendKeys_ProductQuantity(2)
@@ -110,15 +121,23 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Click_CartIconRemoveItem(2)
         with self.assertRaises(NoSuchElementException):
             self.Page_ToolBar.Get_CartIconItemName_Element(2)
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def test_4(self):
+      try:
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(20)
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Click_CartIcon()
         self.assertEqual(self.Page_ToolBar.LocationName(), "SHOPPING CART")
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def test_5(self):
+      try:
         self.Page_Home.click_category("speakers")
         product_price_1 = self.Page_Category.product_price_text(25)
         self.Page_Category.click_product(25)
@@ -143,8 +162,12 @@ class TestAdvantageOnlineShopping(TestCase):
         self.assertEqual(round(product_price_2*1,2), self.Page_Cart.units_price_text(2))
         self.assertEqual(round(product_price_3*5,2), self.Page_Cart.units_price_text(1))
         self.assertEqual(sumprices, self.Page_Cart.total_price_text())
+      except Exception as e:
+         print("test failed")
+         raise e
 
-    def test6(self):
+    def test_6(self):
+      try:
         self.Page_Home.click_category("headphones")
         self.Page_Category.click_product(15)
         self.Page_Product.SendKeys_ProductQuantity(2)
@@ -167,16 +190,24 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_Cart.Wait_UntilInCartPage()
         self.assertEqual(self.Page_Cart.product_quantity_text(2), 4)
         self.assertEqual(self.Page_Cart.product_quantity_text(1), 10)
+      except Exception as e:
+          print("test failed")
+          raise e
 
     def test_7(self):
+      try:
         self.Page_Home.click_category("tablets")
         self.Page_Category.click_product(18)
         self.driver.back()
         self.assertEqual(self.Page_ToolBar.LocationName(), "TABLETS")
         self.driver.back()
         self.assertEqual(self.Page_ToolBar.LocationName(), "HOME")
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def test_8(self):
+      try:
         self.Page_Home.click_category("headphones")
         self.Page_Category.click_product(15)
         self.Page_Product.SendKeys_ProductQuantity(2)
@@ -212,8 +243,12 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Get_UserIconMyAccount_Element().click()
         self.Page_UserAccount.Click_DeleteAccount()
         self.Page_UserAccount.Click_DeleteButton()
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def test_9(self):
+      try:
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(25)
         self.Page_Product.SendKeys_ProductQuantity(2)
@@ -261,8 +296,12 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Wait_CartIconWindowClose()
         self.Page_ToolBar.Get_UserIconOrders_Element().click()
         self.assertEqual(OrderID, self.Page_UserOrder.Get_FOrderNumber_Element(1).text)
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def test_10(self):
+      try:
         self.Page_ToolBar.Get_Usericon_Element().click()
         self.Page_ToolBar.Get_UserIconUsername_Element().send_keys("BOBB4")
         self.Page_ToolBar.Get_UserIconPassowrd_Element().send_keys("Ubd2134rt")
@@ -272,9 +311,14 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Get_UserIconSignOut_Element("BOBB4").click()
         self.Page_ToolBar.Wait_UserSignOut()
         self.assertFalse(self.Page_ToolBar.IsUserSignedIn("BOBB4"))
+      except Exception as e:
+         print("test failed")
+         raise e
 
     def tearDown(self):
-       pass
+      pass
+
+
 
 
 

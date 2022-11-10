@@ -190,9 +190,7 @@ class ToolBarClass:
         "returns the element of the Orders button after UserIcon was Pressed(User Must be Signed In for it to work)"
         self.wait.until(EC.invisibility_of_element((By.CLASS_NAME, "PopUp")))
         if (self.driver.find_element(By.CSS_SELECTOR, "#loginMiniTitle>label[translate='My_account']").is_displayed()):
-            self.Wait_UntilUserIconMyAccountDisplayed()
             return self.driver.find_element(By.CSS_SELECTOR, "#loginMiniTitle>label[translate='My_account']")
-        self.Wait_UntilUserIconMyAccountDisplayed()
         self.Get_Usericon_Element().click()
         return self.driver.find_element(By.CSS_SELECTOR, "#loginMiniTitle>label[translate='My_account']")
 
