@@ -65,7 +65,16 @@ class OrderPaymentLogClass:
         return self.driver.find_element(By.NAME,"cvv_number")
 
     def SendKeys_CVVNumber(self,CVV:int):
+        self.Get_CVVNumber_Element().clear()
         self.Get_CVVNumber_Element().send_keys(f"1{CVV}")
+
+    def SemdKeys_CardNumber(self,CardNumber:int):
+         self.Get_CardNumber_Element().clear()
+         self.Get_CardNumber_Element().send_keys(f"{CardNumber}")
+
+    def SemdKeys_CardHolder(self,Name:str):
+         self.Get_CardHolder_Element().clear()
+         self.Get_CardHolder_Element().send_keys(f"{Name}")
 
 
     def Get_ExpirationDateMonth_Element(self):
@@ -121,6 +130,17 @@ class OrderPaymentLogClass:
     def TotalPriceDigits(self):
         "Returns Total price of items without shipping in Digits"
         return re.sub(r'[^0-9.]', '', self.Get_TotalPrice_Element().text)
+
+    def Get_EditCard_Element(self):
+        return self.driver.find_element(By.CSS_SELECTOR, ".masterCreditSeccion>div>label")
+
+    def IsEditCardDispalyed(self):
+        return self.Get_EditCard_Element().is_displayed()
+
+    def Click_EditCard(self):
+        if(self.IsEditCardDispalyed()):
+            self.Get_EditCard_Element().click()
+
 
 
 
