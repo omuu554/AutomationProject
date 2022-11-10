@@ -152,14 +152,61 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_Product.SendKeys_ProductQuantity(1)
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Click_CartIcon()
+        self.Page_ToolBar.Wait_CartIconWindowClose()
         self.Page_Cart.edit_product_click(2)
         self.Page_Product.SendKeys_ProductQuantity(4)
         self.Page_Product.Click_ADDTOCART()
+        self.Page_Cart.Wait_UntilInCartPage()
+        self.Page_ToolBar.Wait_CartIconWindowClose()
         self.Page_Cart.edit_product_click(1)
         self.Page_Product.SendKeys_ProductQuantity(10)
         self.Page_Product.Click_ADDTOCART()
+        self.Page_Cart.Wait_UntilInCartPage()
         self.assertEqual(self.Page_Cart.product_quantity_text(2), 4)
         self.assertEqual(self.Page_Cart.product_quantity_text(1), 10)
+
+    def test_7(self):
+        self.Page_Home.click_category("tablets")
+        self.Page_Category.click_product(18)
+        self.driver.back()
+        self.assertEqual(self.Page_ToolBar.LocationName(), "TABLETS")
+        self.driver.back()
+        self.assertEqual(self.Page_ToolBar.LocationName(), "HOME")
+
+    def test_8(self):
+        self.Page_Home.click_category("headphones")
+        self.Page_Category.click_product(15)
+        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("laptops")
+        self.Page_Category.click_product(7)
+        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Click_CartIconCheckOut()
+        self.Page_OrderPayment_NotLog.click_registration()
+        self.Page_CreateAccount.Get_Email_Element().send_keys("dodo423@gmail.com")
+        self.Page_CreateAccount.Get_Password_Element().send_keys("B21c34!v")
+        self.Page_CreateAccount.Get_ConfirmPassword_Element().send_keys("B21c34!v")
+        self.Page_CreateAccount.Get_UserName_Element().send_keys("BOBB6")
+        self.Page_CreateAccount.Get_IAgree_Element().click()
+        self.Page_CreateAccount.Click_RegisterButton()
+        self.Page_OrderPayment_Log.Click_NextButton()
+        self.Page_OrderPayment_Log.Get_Username_Element().send_keys("pptr23")
+        self.Page_OrderPayment_Log.Get_Password_Element().send_keys("Ww234567890q")
+        self.Page_OrderPayment_Log.Get_PayNowSafePay__Element().click()
+        self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
+        self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
+        self.Page_ToolBar.Click_CartIcon()
+
+
+
+
+
+
+
+
+
 
 
 
