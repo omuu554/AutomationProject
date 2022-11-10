@@ -141,6 +141,27 @@ class TestAdvantageOnlineShopping(TestCase):
         self.assertEqual(round(product_price_3*5,2), self.Page_Cart.units_price_text(1))
         self.assertEqual(sumprices, self.Page_Cart.total_price_text())
 
+    def test6(self):
+        self.Page_Home.click_category("headphones")
+        self.Page_Category.click_product(15)
+        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("laptops")
+        self.Page_Category.click_product(7)
+        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Click_CartIcon()
+        self.Page_Cart.edit_product_click(2)
+        self.Page_Product.SendKeys_ProductQuantity(4)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_Cart.edit_product_click(1)
+        self.Page_Product.SendKeys_ProductQuantity(10)
+        self.Page_Product.Click_ADDTOCART()
+        self.assertEqual(self.Page_Cart.product_quantity_text(2), 4)
+        self.assertEqual(self.Page_Cart.product_quantity_text(1), 10)
+
+
 
 
 

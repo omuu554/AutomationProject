@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import re
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class Cart_Page_Advantage:
 
@@ -52,7 +53,7 @@ class Cart_Page_Advantage:
 
     def product_quantity_text(self, product_location: int):
         """return the quantity text of the product by location in the table """
-        return self.product_quantity(product_location).text
+        return int(self.product_quantity(product_location).text)
 
     def units_price_text(self, product_location: int):
         """return the units price text in number of the product by product location in table """
@@ -61,6 +62,8 @@ class Cart_Page_Advantage:
     def edit_product_click(self, product_location: int):
         """click on edit of the product by location of the product in table"""
         self.edit_product(product_location).click()
+        wait = WebDriverWait(self.driver, 50)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".max-width>h2")))
 
     def remove_product_click(self, product_location: int):
         """remove the product by the location of the product in table"""
