@@ -20,9 +20,17 @@ class ExcelParemters:
 
         return ParametersDict
 
+    def Edit_CellByTestNumber(self,index:int):
+        pass
+
+
 
     def Close_Workbook(self):
         self.workbook.close()
+
+    def Save_Workbook(self):
+        self.workbook.save("ParametersWithResults.xlsx")
+
 
 
 
@@ -33,7 +41,7 @@ class ExcelParemters:
 
 
 excelSheet = ExcelParemters()
-print(excelSheet.Get_TestParameters_Dict(1))
+print(excelSheet.Parameters["C7"].value)
 
 
 
