@@ -112,7 +112,7 @@ class OrderPaymentLogClass:
 
     def Get_PayNowMasterCard__Element(self):
         "Returns the Element of PayNow Button of SafePay"
-        return self.driver.find_element(By.ID, "pay_now_btn_ManualPayment")
+        return self.driver.find_element(By.ID, "pay_now_btn_MasterCredit")
 
     def Get_PayNowMasterCardHidden_Element(self):
         return self.driver.find_element(By.ID, "pay_now_btn_MasterCredit")

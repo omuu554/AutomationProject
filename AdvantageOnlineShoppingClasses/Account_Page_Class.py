@@ -25,6 +25,9 @@ class AccountPageClass:
     def Click_CloseButton(self):
         self.Get_GetDeleteButton_Element().click()
 
+
+
+
     def Get_EditPaymentMethod_Element(self):
         return self.driver.find_element(By.XPATH, "//div[@id='myAccountContainer']/div[4]/h3/a")
 
@@ -35,7 +38,7 @@ class AccountPageClass:
         self.driver.find_element(By.CLASS_NAME,"selected")
 
     def Get_PaymentMethod_Element(self,index:int):
-        self.driver.find_element(By.XPATH, f"//div[@class='paymentMethods']/div[{index}]")
+        return self.driver.find_element(By.XPATH, f"//div[@class='paymentMethods']/div[{index}]")
 
     def Get_CardNumber_Element(self):
         "Returns the Element of Card Number of MasterCard"
