@@ -168,6 +168,10 @@ class ToolBarClass:
         "Waits for the user to be signed in"
         self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR,"#menuUserLink>span"),username))
 
+    def Wait_UserSignOut(self, username: str):
+        "Waits for the user to be signed in"
+        self.wait.until(EC.text((By.CSS_SELECTOR, "#menuUserLink>span"), ""))
+
     def Get_UserIconName_Element(self):
        return self.driver.find_element(By.CSS_SELECTOR,"#menuUserLink>span")
     def IsUserSignedIn(self,username:str):
