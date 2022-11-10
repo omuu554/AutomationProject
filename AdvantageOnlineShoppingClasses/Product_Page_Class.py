@@ -52,6 +52,7 @@ class ProductClass:
         return self.driver.find_element(By.NAME, "quantity")
 
     def SendKeys_ProductQuantity(self, Quantity:int):
+        "Change Item Quantity"
         self.ClearProductQuantity()
         self.Get_ProductQuantity_Element().send_keys(f"{Quantity}")
 

@@ -28,6 +28,7 @@ class ToolBarClass:
         return self.driver.find_element(By.ID,"menuCart")
 
     def Click_CartIcon(self):
+        "Clicks on the cart icon"
         self.Get_Carticon_Element().click()
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"div.uiview>section>article>h3")))
 
@@ -73,6 +74,9 @@ class ToolBarClass:
     def Get_CartIconCheckOut_Element(self):
         "returns the element of CheckOut button in the cartIcon in toolbar"
         return self.driver.find_element(By.ID,"checkOutPopUp")
+
+    def Click_CartIconCheckOut(self):
+        self.Get_CartIconCheckOut_Element().click()
 
     def Get_CartIconItemCost_Element(self,index:int):
         "returns the element of a spacifice item Cost from CartIcon in toolbar"
@@ -161,6 +165,7 @@ class ToolBarClass:
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='Sign_out'][role='link']")
 
     def Wait_UserSignIn(self,username:str):
+        "Waits for the user to be signed in"
         self.wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR,"#menuUserLink>span"),username))
 
     def Get_UserIconOrders_Element(self):

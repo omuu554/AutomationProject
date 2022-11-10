@@ -82,5 +82,6 @@ class Cart_Page_Advantage:
         self.continue_shopping().click()
 
     def Wait_UntilInCartPage(self):
+        "Waits for the CartPagetoLoad"
         wait = WebDriverWait(self.driver,10)
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.uiview>section>article>h3")))
