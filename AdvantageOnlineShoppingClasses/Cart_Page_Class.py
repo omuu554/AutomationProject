@@ -80,3 +80,6 @@ class Cart_Page_Advantage:
     def continue_shopping_click(self):
         """click on continue shopping button"""
         self.continue_shopping().click()
+
+    def Wait_UntilInCartPage(self):
+        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.uiview>section>article>h3")))
