@@ -211,6 +211,58 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_UserAccount.Click_DeleteAccount()
         self.Page_UserAccount.Click_DeleteButton()
 
+    def test_9(self):
+        self.Page_Home.click_category("speakers")
+        self.Page_Category.click_product(25)
+        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("tablets")
+        self.Page_Category.click_product(18)
+        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("mice")
+        self.Page_Category.click_product(32)
+        self.Page_Product.SendKeys_ProductQuantity(5)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Click_CartIconCheckOut()
+        self.Page_OrderPayment_NotLog.tab_username("BOBB4")
+        self.Page_OrderPayment_NotLog.tab_password("Ubd2134rt")
+        self.Page_OrderPayment_NotLog.click_login_button()
+        self.Page_OrderPayment_Log.Click_NextButton()
+        self.Page_OrderPayment_Log.Click_PaymentMethod(2)
+        self.Page_OrderPayment_Log.Click_EditCard()
+        self.Page_OrderPayment_Log.SendKeys_CardNumber(435623455467)
+        self.Page_OrderPayment_Log.SendKeys_CVVNumber(654)
+        self.Page_OrderPayment_Log.Select_ExpirationDateMonth(5)
+        self.Page_OrderPayment_Log.Select_ExpirationDateYear(2025)
+        self.Page_OrderPayment_Log.SendKeys_CardHolder("BOBB")
+        self.Page_OrderPayment_Log.Get_PayNowMasterCard__Element().click()
+        self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
+        self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
+        OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text
+        self.Page_ToolBar.Click_CartIcon()
+        self.assertTrue(self.Page_Cart.empty_cart_taitel().is_displayed())
+        self.Page_Cart.continue_shopping_click()
+        self.Page_ToolBar.Wait_CartIconWindowClose()
+        self.Page_ToolBar.Get_UserIconOrders_Element().click()
+        self.assertEqual(OrderID, self.Page_UserOrder.Get_FOrderNumber_Element(1).text)
+
+    def test_10(self):
+        self.Page_ToolBar.Get_Usericon_Element().click()
+        self.Page_ToolBar.Get_UserIconUsername_Element().send_keys("BOBB4")
+        self.Page_ToolBar.Get_UserIconPassowrd_Element().send_keys("Ubd2134rt")
+        self.Page_ToolBar.Get_UserIconSignIn_Element().click()
+        self.Page_ToolBar.Wait_UserSignIn("BOBB4")
+        self.assertTrue(self.Page_ToolBar.IsUserSignedIn("BOBB4"))
+        self.Page_ToolBar.Get_UserIconSignOut_Element("BOBB4").click()
+        self.Page_ToolBar.Wait_UserSignOut()
+        self.assertFalse(self.Page_ToolBar.IsUserSignedIn("BOBB4"))
+
+
+
+
 
 
 
