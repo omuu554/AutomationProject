@@ -17,6 +17,9 @@ class OrderPaymentLogClass:
         "Returns the Element of the selected Detailels(Shipping/Payment)"
         return self.driver.find_element(By.CSS_SELECTOR,"#detailslink>label.selected")
 
+    def Wait_UntilOrderPaymentLogLoaded(self):
+        self.wait.until(EC.element_to_be_clickable(self.Get_Next_Element()))
+
     def SelectedDetailsName(self):
         "Returns a strings with the details name(Shipping/Payment)"
         return re.sub(r'[0-9. ]',"",self.Get_SelectedDetails_Element().text).replace(' ','')
