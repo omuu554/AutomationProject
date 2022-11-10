@@ -33,3 +33,6 @@ class CreateAccountClass:
     def Click_RegisterButton(self):
         "Clicks on REGISTER button"
         self.Get_RegisterButton_Element().click()
+
+    def IsIAgree_Selected(self):
+        return self.Get_IAgree_Element().is_selected()

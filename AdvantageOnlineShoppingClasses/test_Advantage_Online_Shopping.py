@@ -1,5 +1,7 @@
 from unittest import TestCase
 from selenium import webdriver
+from unittest import TextTestRunner
+import unittest
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
@@ -191,6 +193,8 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_CreateAccount.Get_ConfirmPassword_Element().send_keys("B21c34!v")
         self.Page_CreateAccount.Get_UserName_Element().send_keys("BOBB6")
         self.Page_CreateAccount.Get_IAgree_Element().click()
+        if(not self.Page_CreateAccount.IsIAgree_Selected()):
+            self.Page_CreateAccount.Get_IAgree_Element().click()
         self.Page_CreateAccount.Click_RegisterButton()
         self.Page_OrderPayment_Log.Click_NextButton()
         self.Page_OrderPayment_Log.Get_Username_Element().send_keys("pptr23")
@@ -250,7 +254,6 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_Log.Get_PayNowMasterCard__Element().click()
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
-        sleep(5)
         OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text
         self.Page_ToolBar.Click_CartIcon()
         self.assertTrue(self.Page_Cart.empty_cart_taitel().is_displayed())
@@ -270,11 +273,8 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Wait_UserSignOut()
         self.assertFalse(self.Page_ToolBar.IsUserSignedIn("BOBB4"))
 
-
-
-
-
-
+    def tearDown(self):
+       pass
 
 
 
