@@ -106,6 +106,10 @@ class ToolBarClass:
         "returns Element of remove button for specifice items in CartIcon ToolBar"
         return self.driver.find_element(By.XPATH,f"//tool-tip-cart/div/table/tbody/tr[{index}]/td[3]/div/div")
 
+    def Click_CartIconRemoveItem(self,index:int):
+        "Clicks on a spacifice item remove button from shopping cart"
+        self.Get_CartIconRemoveItem_Element(index).click()
+
     def Get_UserIconUsername_Element(self):
         "returns the element of the username after the UserIcon popup is Displayed"
         if(self.driver.find_element(By.CLASS_NAME,"PopUp").is_displayed()):
