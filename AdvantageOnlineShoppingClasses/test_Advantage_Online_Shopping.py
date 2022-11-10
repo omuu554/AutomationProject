@@ -23,12 +23,10 @@ from time import sleep
 
 class TestAdvantageOnlineShopping(TestCase):
     def setUp(self):
-            chrome_options = Options()
-            chrome_options.add_experimental_option("detach", True)
             service_chrome = Service(r"C:\selenium1\chromedriver.exe")
 
             # Open browser (create a driver object)
-            self.driver = webdriver.Chrome(service=service_chrome, options=chrome_options)
+            self.driver = webdriver.Chrome(service=service_chrome)
 
             # Go to the required URL
             self.driver.get("https://advantageonlineshopping.com/#/")
