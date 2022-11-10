@@ -198,6 +198,8 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
         self.Page_ToolBar.Click_CartIcon()
+        self.assertIn("EMPTY", self.Page_Cart.empty_cart_text().upper())
+
 
 
 

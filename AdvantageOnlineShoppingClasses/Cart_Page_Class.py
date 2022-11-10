@@ -88,7 +88,7 @@ class Cart_Page_Advantage:
 
 
     def empty_cart_taitel(self):
-        return self.driver.find_element(By.CLASS_NAME, "#shoppingCart>div>label")
+        return self.driver.find_element(By.CSS_SELECTOR, "#shoppingCart>div>label")
 
     def empty_cart_text(self):
-        self.empty_cart_taitel().click()
+        return self.empty_cart_taitel().text
