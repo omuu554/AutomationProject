@@ -17,7 +17,7 @@ class ToolBarClass:
 
     def Get_MenuSearchIcon_Element(self):
         "returns the element of the SearchIcon in the toolbar"
-        return self.driver.find_element(By.ID, "menuSearch")
+        return self.driver.find_element(By.CSS_SELECTOR, "div[id='search']>a>svg")
 
     def Get_Usericon_Element(self):
         "returns the element of the UserIcon in the toolbar"

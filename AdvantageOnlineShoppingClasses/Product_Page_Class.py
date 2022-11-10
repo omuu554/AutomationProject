@@ -24,9 +24,13 @@ class ProductClass:
         "Returns the Element of the product description"
         return self.driver.find_element(By.CSS_SELECTOR, "#Description>p")
 
-    def Get_ProductColor_Element(self,Color:str):
-        "Returns the Element of a spcifice product Color in the page"
+    def Get_ProductColorByName_Element(self,Color:str):
+        "Returns the Element of a spcifice product Color in the page by name"
         return self.driver.find_element(By.CSS_SELECTOR, f"div[ng-show='firstImageToShow']>span.{Color.upper()}")
+
+    def Get_ProductColorByIndex_Element(self,index:int):
+        "Returns the Element of a spcifice product Color in the page By Index"
+        return self.driver.find_element(By.CSS_SELECTOR, f"//div[@id='productProperties']/div[1]/div[1]/span[{index}]")
 
     def Get_SelectedColor_Element(self):
         "Returns the Element of Selected Color"
