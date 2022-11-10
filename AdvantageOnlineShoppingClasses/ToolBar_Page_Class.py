@@ -31,6 +31,9 @@ class ToolBarClass:
         self.Get_Carticon_Element().click()
         self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"div.uiview>section>article>h3")))
 
+    def Wait_CartIconWindowClose(self):
+        self.wait.until(EC.invisibility_of_element_located((By.CSS_SELECTOR, "tool-tip-cart[id='toolTipCart']>div")))
+
     def Get_CloseSearch_Element(self):
         "returns the element of the X in the searchBar after it has been opened in the toolbar"
         if(self.driver.find_element(By.ID,"autoComplete").is_displayed()):
