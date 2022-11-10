@@ -16,6 +16,7 @@ from OrderPayment_Log_Page_Class import OrderPaymentLogClass
 from Product_Page_Class import ProductClass
 from ToolBar_Page_Class import ToolBarClass
 from UserOrder_Page_Class import UserOrdersClass
+from Account_Page_Class import AccountPageClass
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
@@ -53,6 +54,8 @@ class TestAdvantageOnlineShopping(TestCase):
             self.Page_Product = ProductClass(self.driver)
             # Create an object for the User Order page
             self.Page_UserOrder = UserOrdersClass(self.driver)
+            # Create an object for the User Account page
+            self.Page_UserAccount = AccountPageClass(self.driver)
 
     def test_1(self):
         self.Page_Home.click_category("speakers")
@@ -197,8 +200,17 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_Log.Get_PayNowSafePay__Element().click()
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
+        OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text
         self.Page_ToolBar.Click_CartIcon()
-        self.assertIn("EMPTY", self.Page_Cart.empty_cart_text().upper())
+        self.assertTrue(self.Page_Cart.empty_cart_taitel().is_displayed())
+        self.Page_Cart.continue_shopping_click()
+        self.Page_ToolBar.Wait_CartIconWindowClose()
+        self.Page_ToolBar.Get_UserIconOrders_Element().click()
+        self.assertEqual(OrderID,self.Page_UserOrder.Get_FOrderNumber_Element(1).text)
+        self.Page_ToolBar.Get_UserIconMyAccount_Element().click()
+        self.Page_UserAccount.Click_DeleteAccount()
+        self.Page_UserAccount.Click_DeleteButton()
+
 
 
 
