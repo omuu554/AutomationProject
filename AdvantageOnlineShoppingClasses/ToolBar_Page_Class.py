@@ -176,6 +176,14 @@ class ToolBarClass:
         self.Get_Usericon_Element().click()
         return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
 
+    def Get_UserIconMyAccount_Element(self):
+        "returns the element of the Orders button after UserIcon was Pressed(User Must be Signed In for it to work)"
+        self.wait.until(EC.invisibility_of_element((By.CLASS_NAME, "PopUp")))
+        if (self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_account'][role='link']").is_displayed()):
+            return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_Orders'][role='link']")
+        self.Get_Usericon_Element().click()
+        return self.driver.find_element(By.CSS_SELECTOR, "label[translate='My_account'][role='link']")
+
     def Get_Location_Element(self):
         "returns the element of The current location of the user)"
         return self.driver.find_elements(By.CSS_SELECTOR, ".pages>a")[-1]
