@@ -115,8 +115,34 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Click_CartIcon()
         self.assertEqual(self.Page_ToolBar.LocationName(), "SHOPPING CART")
 
+    def test_5(self):
+        self.Page_Home.click_category("speakers")
+        product_price_1 = self.Page_Category.product_price_text(25)
+        self.Page_Category.click_product(25)
+        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("tablets")
+        product_price_2 = self.Page_Category.product_price_text(18)
+        self.Page_Category.click_product(18)
+        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("mice")
+        product_price_3 = self.Page_Category.product_price_text(32)
+        self.Page_Category.click_product(32)
+        self.Page_Product.SendKeys_ProductQuantity(5)
+        self.Page_Product.Get_ProductColorByName_Element("BLUE").click()
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Click_CartIcon()
+        sumprices = self.Page_Cart.units_price_text(3)+self.Page_Cart.units_price_text(2)+self.Page_Cart.units_price_text(1)
+        self.assertEqual(round(product_price_1*2,2), self.Page_Cart.units_price_text(3))
+        self.assertEqual(round(product_price_2*1,2), self.Page_Cart.units_price_text(2))
+        self.assertEqual(round(product_price_3*5,2), self.Page_Cart.units_price_text(1))
+        self.assertEqual(sumprices, self.Page_Cart.total_price_text())
 
-        
+
+
 
 
 

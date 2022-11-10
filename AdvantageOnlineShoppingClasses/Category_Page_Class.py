@@ -31,4 +31,4 @@ class Category_Page_Advantage:
 
     def product_price_text(self, product_id: int):
         """return the price text of the product by product id """
-        return re.sub(r'[^0-9.]', '', self.product_price(product_id).text)
+        return float(re.sub(r'[^0-9.]', '', self.product_price(product_id).text))

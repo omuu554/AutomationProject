@@ -56,7 +56,7 @@ class Cart_Page_Advantage:
 
     def units_price_text(self, product_location: int):
         """return the units price text in number of the product by product location in table """
-        return re.sub(r'[^0-9.]', '', self.units_price(product_location).text)
+        return float(re.sub(r'[^0-9.]', '', self.units_price(product_location).text))
 
     def edit_product_click(self, product_location: int):
         """click on edit of the product by location of the product in table"""
@@ -68,7 +68,7 @@ class Cart_Page_Advantage:
 
     def total_price_text(self):
         """return the total price in number"""
-        return re.sub(r'[^0-9.]', '', self.total_price().text)
+        return float(re.sub(r'[^0-9.]', '', self.total_price().text))
 
     def check_out_button_click(self):
         """click on check out button"""
