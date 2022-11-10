@@ -75,14 +75,14 @@ class OrderPaymentLogClass:
         if(MonthNumber<10):
             MonthSelector.select_by_visible_text(f"0{MonthNumber}")
         else:
-            MonthSelector.select_by_visible_text(f"0{MonthNumber}")
+            MonthSelector.select_by_visible_text(f"{MonthNumber}")
 
     def Get_ExpirationDateYear_Element(self):
         "Returns the Element of the Year Expiration Date of MasterCard"
         return self.driver.find_element(By.NAME, "yyyyListbox")
 
     def Select_ExpirationDateYear(self,YearNumber:int):
-        "Chooses Month Number from Year Expiration Date dropdown list"
+        "Chooses Year Number from Year Expiration Date dropdown list"
         YearSelector = Select(self.Get_ExpirationDateYear_Element())
         YearSelector.select_by_visible_text(f"{YearNumber}")
 
