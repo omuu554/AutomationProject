@@ -17,6 +17,7 @@ from Product_Page_Class import ProductClass
 from ToolBar_Page_Class import ToolBarClass
 from UserOrder_Page_Class import UserOrdersClass
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 
 class TestAdvantageOnlineShopping(TestCase):
@@ -92,6 +93,30 @@ class TestAdvantageOnlineShopping(TestCase):
         self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(1), 199.95)
         self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(2), 479.00)
         self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(3)/2, 129.00)
+
+    def test_3(self):
+        self.Page_Home.click_category("headphones")
+        self.Page_Category.click_product(15)
+        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Get_AdvLogo_Element().click()
+        self.Page_Home.click_category("laptops")
+        self.Page_Category.click_product(7)
+        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Click_CartIconRemoveItem(2)
+        with self.assertRaises(NoSuchElementException):
+            self.Page_ToolBar.Get_CartIconItemName_Element(2)
+
+    def test_4(self):
+        self.Page_Home.click_category("speakers")
+        self.Page_Category.click_product(20)
+        self.Page_Product.Click_ADDTOCART()
+        self.Page_ToolBar.Click_CartIcon()
+        self.assertEqual(self.Page_ToolBar.LocationName(), "SHOPPING CART")
+
+
+        
 
 
 
