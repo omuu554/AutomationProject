@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 import re
 
 
@@ -65,14 +66,17 @@ class OrderPaymentLogClass:
         return self.driver.find_element(By.NAME,"cvv_number")
 
     def SendKeys_CVVNumber(self,CVV:int):
+        "Sends Keys to CVV Number"
         self.Get_CVVNumber_Element().clear()
         self.Get_CVVNumber_Element().send_keys(f"{CVV}")
 
     def SendKeys_CardNumber(self,CardNumber:int):
+         "Sends Keys to Card Number"
          self.Get_CardNumber_Element().clear()
          self.Get_CardNumber_Element().send_keys(f"{CardNumber}")
 
     def SendKeys_CardHolder(self,Name:str):
+         "Sends Keys to Card Holder"
          self.Get_CardHolder_Element().clear()
          self.Get_CardHolder_Element().send_keys(f"{Name}")
 
@@ -110,6 +114,12 @@ class OrderPaymentLogClass:
         "Returns the Element of PayNow Button of SafePay"
         return self.driver.find_element(By.ID, "pay_now_btn_ManualPayment")
 
+    def Get_PayNowMasterCardHidden_Element(self):
+        return self.driver.find_element(By.ID, "pay_now_btn_MasterCredit")
+
+    def Click_PayNowMasterCard(self):
+        ActionChains(self.driver).move_to_element(self.Get_PayNowMasterCard__Element()).click().perform()
+
     def Wait_ThankyouPageLoad(self):
         "Waits until thank you page loads"
         self.wait.until(EC.visibility_of_element_located((By.ID,"orderNumberLabel")))
@@ -132,12 +142,15 @@ class OrderPaymentLogClass:
         return re.sub(r'[^0-9.]', '', self.Get_TotalPrice_Element().text)
 
     def Get_EditCard_Element(self):
+        "Returns the element of edit Card button"
         return self.driver.find_element(By.CSS_SELECTOR, ".masterCreditSeccion>div>label")
 
     def IsEditCardDispalyed(self):
+        "checkes wether the element of edit Card button is shown"
         return self.Get_EditCard_Element().is_displayed()
 
     def Click_EditCard(self):
+        "Click on edit Card button if its is shown"
         if(self.IsEditCardDispalyed()):
             self.Get_EditCard_Element().click()
 

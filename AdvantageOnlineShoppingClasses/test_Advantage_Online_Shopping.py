@@ -196,6 +196,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_Log.Get_Username_Element().send_keys("pptr23")
         self.Page_OrderPayment_Log.Get_Password_Element().send_keys("Ww234567890q")
         self.Page_OrderPayment_Log.Get_PayNowSafePay__Element().click()
+        self.Page_OrderPayment_Log.Get_PayNowSafePay__Element().click()
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
         OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text
@@ -231,12 +232,13 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_OrderPayment_Log.Click_NextButton()
         self.Page_OrderPayment_Log.Click_PaymentMethod(2)
         self.Page_OrderPayment_Log.Click_EditCard()
-        self.Page_OrderPayment_Log.SendKeys_CardNumber(435623455467)
+        self.Page_OrderPayment_Log.Get_CardNumber_Element().clear()
+        self.Page_OrderPayment_Log.Get_CardNumber_Element().send_keys("123456789012")
         self.Page_OrderPayment_Log.SendKeys_CVVNumber(654)
         self.Page_OrderPayment_Log.Select_ExpirationDateMonth(5)
         self.Page_OrderPayment_Log.Select_ExpirationDateYear(2025)
         self.Page_OrderPayment_Log.SendKeys_CardHolder("BOBB")
-        self.Page_OrderPayment_Log.Get_PayNowMasterCard__Element().click()
+        self.driver.execute_script("arguments[0].click();",self.Page_OrderPayment_Log.Get_PayNowMasterCard__Element())
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
         OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text
