@@ -66,13 +66,13 @@ class OrderPaymentLogClass:
 
     def SendKeys_CVVNumber(self,CVV:int):
         self.Get_CVVNumber_Element().clear()
-        self.Get_CVVNumber_Element().send_keys(f"1{CVV}")
+        self.Get_CVVNumber_Element().send_keys(f"{CVV}")
 
-    def SemdKeys_CardNumber(self,CardNumber:int):
+    def SendKeys_CardNumber(self,CardNumber:int):
          self.Get_CardNumber_Element().clear()
          self.Get_CardNumber_Element().send_keys(f"{CardNumber}")
 
-    def SemdKeys_CardHolder(self,Name:str):
+    def SendKeys_CardHolder(self,Name:str):
          self.Get_CardHolder_Element().clear()
          self.Get_CardHolder_Element().send_keys(f"{Name}")
 
