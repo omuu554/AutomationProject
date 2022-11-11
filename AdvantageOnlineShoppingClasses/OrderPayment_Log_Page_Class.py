@@ -87,6 +87,7 @@ class OrderPaymentLogClass:
 
     def Select_ExpirationDateMonth(self,MonthNumber:int):
         "Chooses Month Number from Month Expiration Date dropdown list"
+        int(MonthNumber)
         MonthSelector = Select(self.Get_ExpirationDateMonth_Element())
         if(MonthNumber<10):
             MonthSelector.select_by_visible_text(f"0{MonthNumber}")
@@ -99,6 +100,7 @@ class OrderPaymentLogClass:
 
     def Select_ExpirationDateYear(self,YearNumber:int):
         "Chooses Year Number from Year Expiration Date dropdown list"
+        int(YearNumber)
         YearSelector = Select(self.Get_ExpirationDateYear_Element())
         YearSelector.select_by_visible_text(f"{YearNumber}")
 
