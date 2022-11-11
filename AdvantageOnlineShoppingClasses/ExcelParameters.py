@@ -41,16 +41,3 @@ class ExcelParemters:
 
 
 
-
-
-
-excelSheet = ExcelParemters()
-print(excelSheet.Get_TestParameters_Dict(1))
-
-
-
-
-
-
-
-
