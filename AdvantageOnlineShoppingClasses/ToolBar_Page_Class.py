@@ -209,6 +209,12 @@ class ToolBarClass:
         except:
             return "HOME"
 
+    def Get_Loader_Element(self):
+        return self.driver.find_element(By.XPATH, "//body/div[@class='loader']")
+
+    def Wait_UntilLoaderDisapear(self):
+        self.wait.until(EC.invisibility_of_element(self.Get_Loader_Element()))
+
 
 
 

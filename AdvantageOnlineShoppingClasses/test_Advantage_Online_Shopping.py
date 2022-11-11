@@ -270,6 +270,8 @@ class TestAdvantageOnlineShopping(TestCase):
         if(not self.Page_CreateAccount.IsIAgree_Selected()):
             self.Page_CreateAccount.Get_IAgree_Element().click()
         self.Page_CreateAccount.Click_RegisterButton()
+        self.Page_ToolBar.Wait_UserSignIn(ParametersDict["AOS New Account"]["UserName"])
+        self.Page_ToolBar.Wait_UntilLoaderDisapear()
         self.Page_OrderPayment_Log.Click_NextButton()
         self.Page_OrderPayment_Log.Get_Username_Element().send_keys(ParametersDict["SafePay User"]["UserName"])
         self.Page_OrderPayment_Log.Get_Password_Element().send_keys(ParametersDict["SafePay User"]["Password"])
