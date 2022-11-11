@@ -33,7 +33,7 @@ class ExcelParemters:
         self.workbook.close()
 
     def Save_Workbook(self):
-        self.workbook.save("ParametersWithResults.xlsx")
+        self.workbook.save("Parameters.xlsx")
 
 
 
@@ -45,7 +45,7 @@ class ExcelParemters:
 
 
 excelSheet = ExcelParemters()
-print(excelSheet.Parameters["C7"].value)
+print(excelSheet.Get_TestParameters_Dict(1))
 
 
 

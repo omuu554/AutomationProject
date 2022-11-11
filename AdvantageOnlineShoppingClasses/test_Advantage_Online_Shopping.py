@@ -21,6 +21,7 @@ from UserOrder_Page_Class import UserOrdersClass
 from Account_Page_Class import AccountPageClass
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from ExcelParameters import ExcelParemters
 from time import sleep
 
 class TestAdvantageOnlineShopping(TestCase):
@@ -56,58 +57,80 @@ class TestAdvantageOnlineShopping(TestCase):
             self.Page_UserOrder = UserOrdersClass(self.driver)
             # Create an object for the User Account page
             self.Page_UserAccount = AccountPageClass(self.driver)
+            # Creates an Excel Sheet Object
+            self.Parameters = ExcelParemters()
+
 
     def test_1(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(1)
       try:
-        self.Page_Home.click_category("speakers")
-        self.Page_Category.click_product(20)
-        self.Page_Product.SendKeys_ProductQuantity(3)
+        self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 1"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 1"]["quantity"])
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Get_AdvLogo_Element().click()
-        self.Page_Home.click_category("tablets")
-        self.Page_Category.click_product(17)
-        self.Page_Product.SendKeys_ProductQuantity(4)
+        self.Page_Home.click_category(ParametersDict["Product 2"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 2"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 2"]["quantity"])
         self.Page_Product.Click_ADDTOCART()
-        self.assertEqual(self.Page_ToolBar.ItemsAmountInCartDigits(), 7)
+        TotalCost = int(ParametersDict["Product 2"]["quantity"]) + int(ParametersDict["Product 1"]["quantity"])
+        self.assertEqual(self.Page_ToolBar.ItemsAmountInCartDigits(), TotalCost)
+        self.Parameters.Edit_CellByTestNumber(1,"V")
+        self.Parameters.Save_Workbook()
       except Exception as e:
-         print("test failed")
+         self.Parameters.Edit_CellByTestNumber(1, "X")
+         self.Parameters.Save_Workbook()
          raise e
 
 
     def test_2(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(2)
       try:
-        self.Page_Home.click_category("speakers")
-        self.Page_Category.click_product(25)
-        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 1"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 1"]["quantity"])
+        Product1Name = self.Page_Product.Get_ProductName_Element().text
+        Product1Color = self.Page_Product.SelectedColorName()
+        ItemPrice1 = round(float(self.Page_Product.ProductPriceDigits())*int(ParametersDict["Product 1"]["quantity"]),2)
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Get_AdvLogo_Element().click()
-        self.Page_Home.click_category("tablets")
-        self.Page_Category.click_product(18)
-        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Home.click_category(ParametersDict["Product 2"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 2"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 2"]["quantity"])
+        Product2Name = self.Page_Product.Get_ProductName_Element().text
+        Product2Color = self.Page_Product.SelectedColorName()
+        ItemPrice2 = round(float(self.Page_Product.ProductPriceDigits()) * int(ParametersDict["Product 2"]["quantity"]),2)
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Get_AdvLogo_Element().click()
-        self.Page_Home.click_category("mice")
-        self.Page_Category.click_product(32)
-        self.Page_Product.SendKeys_ProductQuantity(5)
-        self.Page_Product.Get_ProductColorByName_Element("BLUE").click()
+        self.Page_Home.click_category(ParametersDict["Product 3"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 3"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 3"]["quantity"])
+        self.Page_Product.Get_ProductColorByName_Element(ParametersDict["Product 3"]["color"]).click()
+        Product3Name = self.Page_Product.Get_ProductName_Element().text
+        Product3Color = self.Page_Product.SelectedColorName()
+        ItemPrice3 = round(float(self.Page_Product.ProductPriceDigits()) * int(ParametersDict["Product 3"]["quantity"]),2)
         self.Page_Product.Click_ADDTOCART()
-        self.assertEqual(self.Page_ToolBar.CartIconQuntityDigits(1), 5)
-        self.assertEqual(self.Page_ToolBar.CartIconQuntityDigits(2), 1)
-        self.assertEqual(self.Page_ToolBar.CartIconQuntityDigits(3), 2)
-        self.assertIn(self.Page_ToolBar.CartIconItemNameSTR(1), "KENSINGTON ORBIT 72337 TRACKBALL WITH SCROLL RING")
-        self.assertIn(self.Page_ToolBar.CartIconItemNameSTR(2), "HP Pro Tablet 608 G1".upper())
-        self.assertIn(self.Page_ToolBar.CartIconItemNameSTR(3), "Bose SoundLink Wireless Speaker".upper())
-        self.assertEqual(self.Page_ToolBar.Get_CartIconColor_Element(1).text, "BLUE")
-        self.assertEqual(self.Page_ToolBar.Get_CartIconColor_Element(2).text, "BLACK")
-        self.assertEqual(self.Page_ToolBar.Get_CartIconColor_Element(3).text, "TURQUOISE")
-        self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(1), 199.95)
-        self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(2), 479.00)
-        self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(3)/2, 129.00)
+        self.assertEqual(self.Page_ToolBar.CartIconQuntityDigits(1), int(ParametersDict["Product 3"]["quantity"]))
+        self.assertEqual(self.Page_ToolBar.CartIconQuntityDigits(2),int(ParametersDict["Product 2"]["quantity"]))
+        self.assertEqual(self.Page_ToolBar.CartIconQuntityDigits(3), int(ParametersDict["Product 1"]["quantity"]))
+        self.assertIn(self.Page_ToolBar.CartIconItemNameSTR(1), Product3Name)
+        self.assertIn(self.Page_ToolBar.CartIconItemNameSTR(2), Product2Name)
+        self.assertIn(self.Page_ToolBar.CartIconItemNameSTR(3), Product1Name)
+        self.assertEqual(self.Page_ToolBar.Get_CartIconColor_Element(1).text, Product3Color)
+        self.assertEqual(self.Page_ToolBar.Get_CartIconColor_Element(2).text, Product2Color)
+        self.assertEqual(self.Page_ToolBar.Get_CartIconColor_Element(3).text, Product1Color)
+        self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(1), ItemPrice3)
+        self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(2), ItemPrice2)
+        self.assertEqual(self.Page_ToolBar.CartIconItemPriceDigits(3), ItemPrice1)
+        self.Parameters.Edit_CellByTestNumber(2, "V")
+        self.Parameters.Save_Workbook()
       except Exception as e:
-         print("test failed")
-         raise e
+        self.Parameters.Edit_CellByTestNumber(2, "X")
+        self.Parameters.Save_Workbook()
+        raise e
 
     def test_3(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(3)
       try:
         self.Page_Home.click_category("headphones")
         self.Page_Category.click_product(15)
@@ -126,6 +149,7 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_4(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(4)
       try:
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(20)
@@ -137,6 +161,7 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_5(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(5)
       try:
         self.Page_Home.click_category("speakers")
         product_price_1 = self.Page_Category.product_price_text(25)
@@ -167,6 +192,7 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_6(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(6)
       try:
         self.Page_Home.click_category("headphones")
         self.Page_Category.click_product(15)
@@ -195,6 +221,7 @@ class TestAdvantageOnlineShopping(TestCase):
           raise e
 
     def test_7(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(7)
       try:
         self.Page_Home.click_category("tablets")
         self.Page_Category.click_product(18)
@@ -207,6 +234,7 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_8(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(8)
       try:
         self.Page_Home.click_category("headphones")
         self.Page_Category.click_product(15)
@@ -248,6 +276,7 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_9(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(9)
       try:
         self.Page_Home.click_category("speakers")
         self.Page_Category.click_product(25)
@@ -301,6 +330,7 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_10(self):
+      ParametersDict = self.Parameters.Get_TestParameters_Dict(10)
       try:
         self.Page_ToolBar.Get_Usericon_Element().click()
         self.Page_ToolBar.Get_UserIconUsername_Element().send_keys("BOBB4")
