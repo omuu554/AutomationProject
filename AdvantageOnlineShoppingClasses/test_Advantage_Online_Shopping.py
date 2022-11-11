@@ -362,7 +362,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Get_UserIconSignOut_Element(ParametersDict["AOS Existing Account"]["UserName"]).click()
         self.Page_ToolBar.Wait_UserSignOut()
         self.assertFalse(self.Page_ToolBar.IsUserSignedIn(ParametersDict["AOS Existing Account"]["UserName"]))
-        self.Parameters.Edit_CellByTestNumber(9, "V")
+        self.Parameters.Edit_CellByTestNumber(10, "V")
         self.Parameters.Save_Workbook()
       except Exception as e:
         self.Parameters.Edit_CellByTestNumber(10, "X")
