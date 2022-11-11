@@ -358,6 +358,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Get_Usericon_Element().click()
         self.Page_ToolBar.Get_UserIconUsername_Element().send_keys(ParametersDict["AOS Existing Account"]["UserName"])
         self.Page_ToolBar.Get_UserIconPassowrd_Element().send_keys(ParametersDict["AOS Existing Account"]["Password"])
+        self.Page_ToolBar.Wait_UntilLoaderDisapear()
         self.Page_ToolBar.Get_UserIconSignIn_Element().click()
         self.Page_ToolBar.Wait_UserSignIn(ParametersDict["AOS Existing Account"]["UserName"])
         self.Page_ToolBar.Wait_UntilLoaderDisapear()

@@ -209,11 +209,17 @@ class ToolBarClass:
         except:
             return "HOME"
 
-    def Get_Loader_Element(self):
+    def Get_LoaderPage_Element(self):
         return self.driver.find_element(By.XPATH, "//body/div[@class='loader']")
 
+    def Get_LoaderPopUp(self):
+        return self.driver.find_element(By.CSS_SELECTOR, "login-modal>div>div>div.loader")
+
+    def Wait_UntilPopupLoaderDisapear(self):
+        self.wait.until(EC.invisibility_of_element(self.Get_LoaderPopUp()))
+
     def Wait_UntilLoaderDisapear(self):
-        self.wait.until(EC.invisibility_of_element(self.Get_Loader_Element()))
+        self.wait.until(EC.invisibility_of_element(self.Get_LoaderPage_Element()))
 
 
 
