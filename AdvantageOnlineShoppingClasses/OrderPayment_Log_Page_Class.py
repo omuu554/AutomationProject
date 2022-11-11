@@ -141,7 +141,7 @@ class OrderPaymentLogClass:
 
     def TotalPriceDigits(self):
         "Returns Total price of items without shipping in Digits"
-        return re.sub(r'[^0-9.]', '', self.Get_TotalPrice_Element().text)
+        return float(re.sub(r'[^0-9.]', '', self.Get_TotalPrice_Element().text))
 
     def Get_EditCard_Element(self):
         "Returns the element of edit Card button"

@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 class AccountPageClass:
 
@@ -61,6 +63,9 @@ class AccountPageClass:
     def Get_CVVNumber_Element(self):
         "Returns the Element of CVV Number of MasterCard"
         return self.driver.find_element(By.NAME,"cvv_number")
+
+    def SendKeys_CVVNumber(self, CVVNumber:int):
+        ActionChains(self.driver).send_keys_to_element(self.Get_CVVNumber_Element(),CVVNumber).perform()
 
     def Get_ExpirationDateMonth_Element(self):
         "Returns the Element of the Month Expiration Date of MasterCard"

@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import re
 
 class UserOrdersClass:
 
@@ -17,6 +18,10 @@ class UserOrdersClass:
     def Get_FOrderTotalCost_Element(self, index:int):
         "returns the Element of the Total cost of Order(must only give index of first item of an order)"
         return self.Get_FOrderedItem_Element(index)[-1].find_element(By.CSS_SELECTOR, "td>label")
+
+    def FTotalPriceDigits(self, index:int):
+        "Returns Total price of items without shipping in Digits"
+        return float(re.sub(r'[^0-9.]', '', self.Get_FOrderTotalCost_Element(index).text))
 
     def Get_FOrderItemName_Element(self, index:int):
         "returns the Element Item Name(must only give index of first item of an order)"
