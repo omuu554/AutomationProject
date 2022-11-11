@@ -235,41 +235,44 @@ class TestAdvantageOnlineShopping(TestCase):
     def test_7(self):
       ParametersDict = self.Parameters.Get_TestParameters_Dict(7)
       try:
-        self.Page_Home.click_category("tablets")
-        self.Page_Category.click_product(18)
+        self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 1"]["id"])
         self.driver.back()
-        self.assertEqual(self.Page_ToolBar.LocationName(), "TABLETS")
+        self.assertEqual(self.Page_ToolBar.LocationName(), ParametersDict["Product 1"]["Category"].upper())
         self.driver.back()
         self.assertEqual(self.Page_ToolBar.LocationName(), "HOME")
+        self.Parameters.Edit_CellByTestNumber(7, "V")
+        self.Parameters.Save_Workbook()
       except Exception as e:
-         print("test failed")
-         raise e
+        self.Parameters.Edit_CellByTestNumber(7, "X")
+        self.Parameters.Save_Workbook()
+        raise e
 
     def test_8(self):
       ParametersDict = self.Parameters.Get_TestParameters_Dict(8)
       try:
-        self.Page_Home.click_category("headphones")
-        self.Page_Category.click_product(15)
-        self.Page_Product.SendKeys_ProductQuantity(2)
+        self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 1"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 1"]["quantity"])
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Get_AdvLogo_Element().click()
-        self.Page_Home.click_category("laptops")
-        self.Page_Category.click_product(7)
-        self.Page_Product.SendKeys_ProductQuantity(1)
+        self.Page_Home.click_category(ParametersDict["Product 2"]["Category"])
+        self.Page_Category.click_product(ParametersDict["Product 2"]["id"])
+        self.Page_Product.SendKeys_ProductQuantity(ParametersDict["Product 2"]["quantity"])
         self.Page_Product.Click_ADDTOCART()
         self.Page_ToolBar.Click_CartIconCheckOut()
         self.Page_OrderPayment_NotLog.click_registration()
-        self.Page_CreateAccount.Get_Email_Element().send_keys("dodo423@gmail.com")
-        self.Page_CreateAccount.Get_Password_Element().send_keys("B21c34!v")
-        self.Page_CreateAccount.Get_ConfirmPassword_Element().send_keys("B21c34!v")
-        self.Page_CreateAccount.Get_UserName_Element().send_keys("BOBB6")
+        self.Page_CreateAccount.Get_Email_Element().send_keys(ParametersDict["AOS New Account"]["E-Mail"])
+        self.Page_CreateAccount.Get_Password_Element().send_keys(ParametersDict["AOS New Account"]["Password"])
+        self.Page_CreateAccount.Get_ConfirmPassword_Element().send_keys(ParametersDict["AOS New Account"]["Password"])
+        self.Page_CreateAccount.Get_UserName_Element().send_keys(ParametersDict["AOS New Account"]["UserName"])
         self.Page_CreateAccount.Get_IAgree_Element().click()
         if(not self.Page_CreateAccount.IsIAgree_Selected()):
             self.Page_CreateAccount.Get_IAgree_Element().click()
         self.Page_CreateAccount.Click_RegisterButton()
         self.Page_OrderPayment_Log.Click_NextButton()
-        self.Page_OrderPayment_Log.Get_Username_Element().send_keys("pptr23")
-        self.Page_OrderPayment_Log.Get_Password_Element().send_keys("Ww234567890q")
+        self.Page_OrderPayment_Log.Get_Username_Element().send_keys(ParametersDict["SafePay User"]["UserName"])
+        self.Page_OrderPayment_Log.Get_Password_Element().send_keys(ParametersDict["SafePay User"]["Password"])
         self.Page_OrderPayment_Log.Get_PayNowSafePay__Element().click()
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
@@ -283,9 +286,12 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Get_UserIconMyAccount_Element().click()
         self.Page_UserAccount.Click_DeleteAccount()
         self.Page_UserAccount.Click_DeleteButton()
+        self.Parameters.Edit_CellByTestNumber(8, "V")
+        self.Parameters.Save_Workbook()
       except Exception as e:
-         print("test failed")
-         raise e
+        self.Parameters.Edit_CellByTestNumber(8, "X")
+        self.Parameters.Save_Workbook()
+        raise e
 
     def test_9(self):
       ParametersDict = self.Parameters.Get_TestParameters_Dict(9)
