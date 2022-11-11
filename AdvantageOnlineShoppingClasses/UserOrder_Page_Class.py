@@ -42,6 +42,10 @@ class UserOrdersClass:
         "returns the Element Item name(must only give index of item that is not the first in the order)"
         return self.driver.find_element(By.XPATH, f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[1]/span")
 
+    def Get_OrderItemQuantity_Element(self, index: int):
+        "returns the Element Item quantity(must only give index of item that is not the first in the order)"
+        return self.driver.find_element(By.XPATH,  f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[3]/label")
+
     def Get_OrderItemColor_Element(self, index: int):
         "returns the Element Item color(must only give index of item that is not the first in the order)"
         return self.driver.find_element(By.XPATH, f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[2]/div")
