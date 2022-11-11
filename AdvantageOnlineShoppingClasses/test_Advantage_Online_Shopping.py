@@ -360,6 +360,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_ToolBar.Get_UserIconPassowrd_Element().send_keys(ParametersDict["AOS Existing Account"]["Password"])
         self.Page_ToolBar.Get_UserIconSignIn_Element().click()
         self.Page_ToolBar.Wait_UserSignIn(ParametersDict["AOS Existing Account"]["UserName"])
+        self.Page_ToolBar.Wait_UntilLoaderDisapear()
         self.assertTrue(self.Page_ToolBar.IsUserSignedIn(ParametersDict["AOS Existing Account"]["UserName"]))
         self.Page_ToolBar.Get_UserIconSignOut_Element(ParametersDict["AOS Existing Account"]["UserName"]).click()
         self.Page_ToolBar.Wait_UserSignOut()
