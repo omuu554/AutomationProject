@@ -355,7 +355,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_Cart.check_out_button_click()
         self.Page_OrderPayment_Log.Click_NextButton()
         self.Page_OrderPayment_Log.Click_PaymentMethod(2)
-        self.Page_OrderPayment_Log.Get_PayNowMasterCard__Element().click()
+        self.Page_OrderPayment_Log.Get_PayNowMasterCardHidden_Element().click()
         self.Page_OrderPayment_Log.Wait_ThankyouPageLoad()
         self.assertIn("THANK YOU", self.Page_OrderPayment_Log.Get_ThankYou_Element().text.upper())
         OrderID = self.Page_OrderPayment_Log.Get_OrderNumber_Element().text

@@ -82,7 +82,7 @@ class OrderPaymentLogClass:
 
     def SendKyes_CardNumberGlitch(self,CardNumber:str):
         "Fixes a glitch where Card Number disapears when Sending Keys in automation"
-        while(self.Get_CardNumber_Element().get_attribute('value') != CardNumber):
+        while(self.Get_CardNumber_Element().text != CardNumber):
             self.Get_CardNumber_Element().clear()
             self.SendKeys_CardNumber(CardNumber)
 
@@ -120,7 +120,7 @@ class OrderPaymentLogClass:
 
     def Get_PayNowMasterCard__Element(self):
         "Returns the Element of PayNow Button of SafePay"
-        return self.driver.find_element(By.ID, "pay_now_btn_MasterCredit")
+        return self.driver.find_element(By.ID, "pay_now_btn_ManualPayment")
 
     def Get_PayNowMasterCardHidden_Element(self):
         return self.driver.find_element(By.ID, "pay_now_btn_MasterCredit")
