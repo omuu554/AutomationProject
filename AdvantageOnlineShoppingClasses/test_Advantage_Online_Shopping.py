@@ -343,7 +343,7 @@ class TestAdvantageOnlineShopping(TestCase):
         self.Page_UserAccount.Get_CardNumber_Element().clear()
         self.Page_UserAccount.Get_CardNumber_Element().send_keys(ParametersDict["MasterCredit"]["Card"])
         self.Page_UserAccount.Get_CVVNumber_Element().clear()
-        self.Page_UserAccount.SendKeys_CVVNumber(ParametersDict["MasterCredit"]["CVV"])
+        self.Page_UserAccount.SendKeys_CVVGlitch(ParametersDict["MasterCredit"]["CVV"])
         self.Page_UserAccount.Select_ExpirationDateMonth(ParametersDict["MasterCredit"]["Month"])
         self.Page_UserAccount.Select_ExpirationDateYear(ParametersDict["MasterCredit"]["Year"])
         self.Page_UserAccount.Get_CardHolder_Element().clear()

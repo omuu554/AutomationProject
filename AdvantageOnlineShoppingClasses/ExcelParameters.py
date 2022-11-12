@@ -16,7 +16,7 @@ class ExcelParemters:
             if (row[0] is not None):
                 currentObject = row[0]
                 info = {}
-            info[row[1]] = row[TestNumber]
+            info[row[1]] = str(row[TestNumber])
             ParametersDict[currentObject] = info
 
         return ParametersDict

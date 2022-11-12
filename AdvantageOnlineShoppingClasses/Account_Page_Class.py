@@ -65,7 +65,15 @@ class AccountPageClass:
         return self.driver.find_element(By.NAME,"cvv_number")
 
     def SendKeys_CVVNumber(self, CVVNumber:int):
+        "Sends Keys to the element of CVV Number"
         ActionChains(self.driver).send_keys_to_element(self.Get_CVVNumber_Element(),CVVNumber).perform()
+
+    def SendKeys_CVVGlitch(self, CVVNumber:str):
+        "Takes Care of a glitch where CVV number disapears when Sends keys in automation"
+        while(self.Get_CVVNumber_Element().get_attribute("value") != CVVNumber):
+            self.Get_CVVNumber_Element().clear()
+            self.SendKeys_CVVNumber(CVVNumber)
+
 
     def Get_ExpirationDateMonth_Element(self):
         "Returns the Element of the Month Expiration Date of MasterCard"
@@ -73,7 +81,7 @@ class AccountPageClass:
 
     def Select_ExpirationDateMonth(self,MonthNumber:int):
         "Chooses Month Number from Month Expiration Date dropdown list"
-        int(MonthNumber)
+        MonthNumber = int(MonthNumber)
         MonthSelector = Select(self.Get_ExpirationDateMonth_Element())
         if(MonthNumber<10):
             MonthSelector.select_by_visible_text(f"0{MonthNumber}")
@@ -86,7 +94,7 @@ class AccountPageClass:
 
     def Select_ExpirationDateYear(self, YearNumber: int):
         "Chooses Year Number from Year Expiration Date dropdown list"
-        int(YearNumber)
+        YearNumber = int(YearNumber)
         YearSelector = Select(self.Get_ExpirationDateYear_Element())
         YearSelector.select_by_visible_text(f"{YearNumber}")
 

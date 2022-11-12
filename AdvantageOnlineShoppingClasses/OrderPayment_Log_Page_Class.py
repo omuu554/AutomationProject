@@ -65,20 +65,26 @@ class OrderPaymentLogClass:
         "Returns the Element of CVV Number of MasterCard"
         return self.driver.find_element(By.NAME,"cvv_number")
 
-    def SendKeys_CVVNumber(self,CVV:int):
+    def SendKeys_CVVNumber(self,CVV:str):
         "Sends Keys to CVV Number"
-        self.Get_CVVNumber_Element().clear()
         self.Get_CVVNumber_Element().send_keys(f"{CVV}")
 
-    def SendKeys_CardNumber(self,CardNumber:int):
+    def SendKeys_CVVNumberGlitch(self,CVV:str):
+        "Fixes a glitch where CVV Number disapears when Sending Keys in automation"
+        while(self.Get_CVVNumber_Element().get_attribute('value') != CVV):
+            self.Get_CVVNumber_Element().clear()
+            self.SendKeys_CVVNumber(CVV)
+
+
+    def SendKeys_CardNumber(self,CardNumber:str):
          "Sends Keys to Card Number"
-         self.Get_CardNumber_Element().clear()
          self.Get_CardNumber_Element().send_keys(f"{CardNumber}")
 
-    def SendKeys_CardHolder(self,Name:str):
-         "Sends Keys to Card Holder"
-         self.Get_CardHolder_Element().clear()
-         self.Get_CardHolder_Element().send_keys(f"{Name}")
+    def SendKyes_CardNumberGlitch(self,CardNumber:str):
+        "Fixes a glitch where Card Number disapears when Sending Keys in automation"
+        while(self.Get_CardNumber_Element().get_attribute('value') != CardNumber):
+            self.Get_CardNumber_Element().clear()
+            self.SendKeys_CardNumber(CardNumber)
 
 
     def Get_ExpirationDateMonth_Element(self):
@@ -87,7 +93,7 @@ class OrderPaymentLogClass:
 
     def Select_ExpirationDateMonth(self,MonthNumber:int):
         "Chooses Month Number from Month Expiration Date dropdown list"
-        int(MonthNumber)
+        MonthNumber = int(MonthNumber)
         MonthSelector = Select(self.Get_ExpirationDateMonth_Element())
         if(MonthNumber<10):
             MonthSelector.select_by_visible_text(f"0{MonthNumber}")
@@ -100,7 +106,7 @@ class OrderPaymentLogClass:
 
     def Select_ExpirationDateYear(self,YearNumber:int):
         "Chooses Year Number from Year Expiration Date dropdown list"
-        int(YearNumber)
+        YearNumber = int(YearNumber)
         YearSelector = Select(self.Get_ExpirationDateYear_Element())
         YearSelector.select_by_visible_text(f"{YearNumber}")
 
