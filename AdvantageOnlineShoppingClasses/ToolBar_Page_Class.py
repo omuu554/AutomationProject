@@ -210,15 +210,11 @@ class ToolBarClass:
             return "HOME"
 
     def Get_LoaderPage_Element(self):
+        "Returns the Element of the loading Screen"
         return self.driver.find_element(By.XPATH, "//body/div[@class='loader']")
 
-    def Get_LoaderPopUp(self):
-        return self.driver.find_element(By.CSS_SELECTOR, "login-modal>div>div>div.loader")
-
-    def Wait_UntilPopupLoaderDisapear(self):
-        self.wait.until(EC.invisibility_of_element(self.Get_LoaderPopUp()))
-
     def Wait_UntilLoaderDisapear(self):
+        "Waits until Loading screen is invisible"
         self.wait.until(EC.invisibility_of_element(self.Get_LoaderPage_Element()))
 
 
