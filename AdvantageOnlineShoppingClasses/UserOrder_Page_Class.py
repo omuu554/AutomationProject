@@ -43,6 +43,15 @@ class UserOrdersClass:
         "returns the Element for remove order button(must only give index of first item of an order)"
         return self.Get_FOrderedItem_Element(index)[-1].find_element(By.CSS_SELECTOR, "td>span>a")
 
+
+    def Get_FOrderDeleteButton_Element(self):
+        "returns the Element for Delete order button(must only give index of first item of an order)"
+        return self.driver.find_element(By.ID, "confBtn_1")
+
+    def Get_FOrderCloseDelete_Element(self):
+        "returns the Element for close remove order button(must only give index of first item of an order)"
+        return self.driver.find_element(By.ID, "confBtn_2")
+
     def Get_OrderItemName_Element(self, index: int):
         "returns the Element Item name(must only give index of item that is not the first in the order)"
         return self.driver.find_element(By.XPATH, f"//div[@id='myAccountContainer']/div/table/tbody/tr[{index + 1}]/td[1]/span")
