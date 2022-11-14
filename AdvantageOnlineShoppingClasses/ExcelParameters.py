@@ -9,6 +9,7 @@ class ExcelParemters:
         self.NumberToTestDict = {"1":"C", "2":"D", "3":"E", "4":"F", "5":"G", "6":"H", "7":"I", "8":"J", "9":"K", "10":"L"}
 
     def Get_TestParameters_Dict(self,TestNumber:int):
+        "Converts the test data to dictionary"
         TestNumber = TestNumber + 1
         ParametersDict = {}
         info = {}
@@ -22,6 +23,7 @@ class ExcelParemters:
         return ParametersDict
 
     def Edit_CellByTestNumber(self,index:int, TestResult:str):
+        "Write text into spacific cell"
         index = str(index)
         TestCol = self.NumberToTestDict[index]
         self.Parameters[f"{TestCol}32"].value = TestResult
