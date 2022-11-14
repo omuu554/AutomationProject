@@ -62,6 +62,8 @@ class TestAdvantageOnlineShopping(TestCase):
 
 
     def test_1(self):
+      """selecting two products in differnt quantities checks that the final
+      product quantity appears correctly in the shopping cart on the top right"""
       ParametersDict = self.Parameters.Get_TestParameters_Dict(1)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -84,6 +86,7 @@ class TestAdvantageOnlineShopping(TestCase):
 
 
     def test_2(self):
+      """after choosing three prodocts check name, color,quantity,and price in the shopping cart on the top right"""
       ParametersDict = self.Parameters.Get_TestParameters_Dict(2)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -130,6 +133,8 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_3(self):
+      """selecting two products adn removing one of them by using the shopping cart on the top
+      right side checks that the product has been removwed"""
       ParametersDict = self.Parameters.Get_TestParameters_Dict(3)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -152,6 +157,8 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_4(self):
+      """Selection of one product and after checkout by the shopping cart on the upper right side
+       checking to go to the shopping cart page"""
       ParametersDict = self.Parameters.Get_TestParameters_Dict(4)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -167,6 +174,9 @@ class TestAdvantageOnlineShopping(TestCase):
          raise e
 
     def test_5(self):
+      """Choosing three products and going to the shopping cart page,
+          Checks that the total amount matches the prices and quantities
+           of the products when selecting the products"""
       ParametersDict = self.Parameters.Get_TestParameters_Dict(5)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
