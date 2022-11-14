@@ -201,6 +201,7 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_6(self):
+      "Adds 2 products to the cart and edits the quantity of both of them, and checks if the quantity of the items changed"
       ParametersDict = self.Parameters.Get_TestParameters_Dict(6)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -233,6 +234,7 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_7(self):
+      "Goes to an item page, goes back and checks if the category given by the dictionary is equal to the category page name, goes back one more time to see if its in the homePage"
       ParametersDict = self.Parameters.Get_TestParameters_Dict(7)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -249,6 +251,7 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_8(self):
+      "Adds 2 products to the cart, Creates a new account and completes the order after changing Safe username and password, checks if the order information is correct and deletes the account "
       ParametersDict = self.Parameters.Get_TestParameters_Dict(8)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -308,6 +311,7 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_9(self):
+      "Adds 3 products to the cart, registers with an existing account , goes to the MyAccount page to change card payment info, goes to complete the order and checks if the information in the Orders page is correct"
       ParametersDict = self.Parameters.Get_TestParameters_Dict(9)
       try:
         self.Page_Home.click_category(ParametersDict["Product 1"]["Category"])
@@ -384,6 +388,7 @@ class TestAdvantageOnlineShopping(TestCase):
         raise e
 
     def test_10(self):
+      "Signs in and checks the Sign out of the account function"
       ParametersDict = self.Parameters.Get_TestParameters_Dict(10)
       try:
         self.Page_ToolBar.Get_Usericon_Element().click()
